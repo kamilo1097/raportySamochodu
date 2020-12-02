@@ -1,0 +1,119 @@
+﻿@model ServiceCar.Models.CarDataViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Car</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.car.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.car.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.car.SubName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.car.SubName) 
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.car.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.car.Price) zł
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.car.BoughtDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.car.BoughtDate)
+        </dd>
+    </dl>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Spalanie z ostatniego przejazdu:
+            @{
+                if (Model.LastFuelConsumption == 0)
+                {
+                    <b>Brak informacji</b>
+                }
+                else
+                {
+                    <b>@Model.LastFuelConsumption.ToString("F2")</b> @:Litrów / 100km
+                }
+            }
+            <br />
+            <br />
+            Średnie spalanie:
+            @{
+                if (Model.AverageFuelConsumption == 0)
+                {
+                    <b>Brak informacji</b>
+                }
+                else
+                {
+                    <b>@Model.AverageFuelConsumption.ToString("F2")</b> @:Litrów / 100km
+                }
+            }
+            <br />
+            <br />
+            Ilość wydanych pieniędzy na tankowania:
+            @{
+                if (Model.SpendFuelMoney == 0)
+                {
+                    <b>Brak informacji</b>
+                }
+                else
+                {
+                    <b>@Model.SpendFuelMoney.ToString("F2")</b>@:zł
+                }
+            }
+
+        </div>
+        <div class="col">
+            Termin ostatniego przeglądu:
+            @{
+                if (Model.lastOverview == null)
+                {
+                    <b>Brak informacji</b>
+                }
+                else
+                {
+                    <b>@Model.lastOverview.ToString("d")</b>
+                    @:Do następnego przeglądu pozostało: <b>@Model.DaysToNextOverview</b> dni
+                }
+            }
+            <br />
+            <br />
+            Termin ostatniego ubezpieczenia:
+            @{
+                if (Model.LastInsurance == null)
+                {
+                    <b>Brak informacji</b>
+                }
+                else
+                {
+                    <b>@Model.LastInsurance.ToString("d")</b>
+                    @:Do następnego przeglądu pozostało: <b>@Model.DaysToNextInsurance</b> dni
+                }
+            }
+        </div>
+        
+
+
+    </div>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="1">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
